@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+
+body {
+	min-height: 100vh;
+	background-color: #f5f6f8;
+}
+
+/* Navbar */
+.navbar {
+	height: 60px;
+}
+
+.navbar-brand {
+	font-weight: 600;
+}
+
+/* Sidebar */
+.sidebar {
+	position: fixed;
+	top: 60px;
+	left: 0;
+	width: 240px;
+	height: calc(100vh - 60px);
+	background-color: #212529;
+	padding-top: 20px;
+}
+
+.sidebar .menu-title {
+	padding: 10px 20px;
+	color: #adb5bd;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+.sidebar .nav-link {
+	color: #ced4da;
+	padding: 12px 20px;
+	font-size: 15px;
+}
+
+.sidebar .nav-link:hover {
+	background-color: #343a40;
+	color: #fff;
+}
+
+.sidebar .nav-link.active {
+	background-color: #495057;
+	color: #fff;
+}
+
+/* Main */
+.main-content {
+	margin-left: 240px;
+	padding: 30px;
+	padding-top: 90px;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dashboard-card .card-title {
+	color: #6c757d;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.dashboard-card .card-value {
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.section-card {
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
