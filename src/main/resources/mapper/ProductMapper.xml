@@ -27,8 +27,14 @@
 	</sql>
 
 	<select id="selectPage" resultType="ProductDTO">
-		select * from tbl_product
+		select
+			p.*,
+		    c.name AS category_name,
+		    s.uname AS seller_name
+		from tbl_product p
 		<include refid="search" />
+		left outer join category c on p.category_id = c.category_id
+		left outer join tbl_user s on p.seller_id = s.uid
 		order by pno desc
 		limit #{limit} offset #{offset}
 	</select>
@@ -39,7 +45,13 @@
 	</select>
 
 	<select id="selectOne" resultType="ProductDTO">
-		select * from tbl_product
+		select
+			p.*,
+		    c.name AS category_name,
+		    s.uname AS seller_name
+		from tbl_product p
+		left outer join category c on p.category_id = c.category_id
+		left outer join tbl_user s on p.seller_id = s.uid
 		where pno = #{pno}
 	</select>
 

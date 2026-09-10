@@ -11,6 +11,20 @@ public class PageRequestDTO {
 	private int size;
 	private ProductSearchDTO search;
 	
+	//조회용 링크
+	public String getPageLink() {
+	    
+		StringBuilder builder = new StringBuilder();
+
+	    builder.append("page=").append(page);
+	    builder.append("&size=").append(size);
+
+	    if (search != null) {
+	        builder.append(search.getLink());
+	    }
+
+	    return builder.toString();
+	}
 	
 	//기본값 지정
 	public PageRequestDTO(){

@@ -12,4 +12,7 @@ public interface ProductService {
 	PageResponseDTO<ProductDTO> list(PageRequestDTO pageRequestDTO);
 	
 	List<CategoryDTO> getCategories();
+	
+	ProductDTO getProductOne(int pno);
+	
 }

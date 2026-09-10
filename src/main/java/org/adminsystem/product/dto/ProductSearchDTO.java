@@ -15,10 +15,10 @@ public class ProductSearchDTO {
 	private List<Long> categoryId;
 	private List<String> status;
 	
-	//링크
+	//페이지네이션용 링크
 	public String getLink(){
 		
-		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+		UriComponentsBuilder builder = UriComponentsBuilder.newInstance();		
 
         if (keyword != null && !keyword.trim().isEmpty()) {
             builder.queryParam("keyword", keyword);

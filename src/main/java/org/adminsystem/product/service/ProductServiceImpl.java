@@ -38,5 +38,11 @@ public class ProductServiceImpl implements ProductService{
 	public List<CategoryDTO> getCategories() {
 	    return productMapper.selectCategories();
 	}
+
+	@Override
+	public ProductDTO getProductOne(int pno) {
+		return productMapper.selectOne(pno);
+	}
+	
 	
 }

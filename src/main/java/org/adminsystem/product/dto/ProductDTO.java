@@ -18,4 +18,7 @@ public class ProductDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
     
+    private String categoryName;
+    private String sellerName;
+    
 }

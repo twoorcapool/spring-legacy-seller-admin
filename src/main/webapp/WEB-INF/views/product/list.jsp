@@ -5,7 +5,6 @@
 <%@include file="../includes/header.jsp"%>
 
 <main class="main-content">
-
 	<!-- 페이지 제목 -->
 	<div class="d-flex justify-content-between align-items-center mb-4">
 
@@ -148,13 +147,13 @@
 								<td>${product.pno}</td>
 
 								<td><a
-									href="${pageContext.request.contextPath}/product/read?pno=${product.pno}"
+									href="${pageContext.request.contextPath}/product/read/${product.pno}?${requestDTO.pageLink}"
 									class="text-decoration-none fw-semibold"> ${product.pname}
 								</a></td>
 
-								<td>${product.categoryId}</td>
+								<td>${product.categoryName}</td>
 
-								<td>${product.sellerId}</td>
+								<td>${product.sellerName}</td>
 
 								<td><fmt:formatNumber value="${product.price}"
 										pattern="#,###" />원</td>
