@@ -16,6 +16,5 @@
 </div>
 </div>
 
-<script src="/resources/js/scripts.js" defer></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package org.adminsystem.product.controller;
 
 import org.adminsystem.common.dto.PageRequestDTO;
+import org.adminsystem.product.dto.ProductSearchDTO;
 import org.adminsystem.product.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,10 @@ public class ProductController {
 	@GetMapping("list")
 	public void list(
 			@ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+			@ModelAttribute("searchDTO") ProductSearchDTO searchDTO,
 			Model model) {
+	    requestDTO.setSearch(searchDTO); //파라미터 바인딩 전용 DTO
 		model.addAttribute("responseDTO", productService.list(requestDTO));
+		model.addAttribute("categories", productService.getCategories());
 	}
 }

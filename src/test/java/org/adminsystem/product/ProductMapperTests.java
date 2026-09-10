@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adminsystem.common.dto.PageRequestDTO;
 import org.adminsystem.product.dto.ProductDTO;
+import org.adminsystem.product.dto.ProductSearchDTO;
 import org.adminsystem.product.mapper.ProductMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,10 +25,12 @@ public class ProductMapperTests {
 	@Test
 	public void testSelectPage() {
 		PageRequestDTO page = new PageRequestDTO();
-		page.setPage(2);
-		page.setSize(3);
+		ProductSearchDTO searchDTO = new ProductSearchDTO();
+		searchDTO.setCategoryId(List.of(1L,2L));
+		page.setSearch(searchDTO);
 		List<ProductDTO> list = productMapper.selectPage(page);
 		list.forEach( p -> log.info(p));
+		
 	}
 	
 	@Test

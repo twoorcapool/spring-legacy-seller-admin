@@ -29,73 +29,61 @@
 				method="get">
 
 				<div class="row g-2">
+					<div class="search-box">
+						
+						<!-- 키워드검색 -->
+						<div class="search-row">
+							<c:set var="keyword">
+								<c:out value="${searchDTO.keyword}" />
+							</c:set>
+							<label>상품 검색</label> <input type="text" name="keyword"
+								value="<c:out value='${keyword}'/>"
+								placeholder="상품명 또는 설명을 입력하세요">
+						</div>
+						
+						<!-- 카테고리 검색 -->
+						<div class="search-row">
+							<label>카테고리</label>
+							<div class="dropdown" data-bs-auto-close="outside">
+								<button class="btn btn-outline-secondary dropdown-toggle"
+									type="button" data-bs-toggle="dropdown">카테고리 선택</button>
+								<div class="dropdown-menu categoryList">
+									<c:forEach items="${categories}" var="category">
+										<label class="dropdown-item"><input type="checkbox"
+											name="categoryId" value="${category.categoryId}"
+											data-name="${category.name}"> <c:out
+												value="${category.name}" /></label>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
 
-					<!-- 검색어 -->
-					<div class="col-md-4">
-						<label class="form-label">상품명</label> <input type="text"
-							name="keyword" class="form-control" placeholder="상품명을 입력하세요"
-							value="${pageRequestDTO.keyword}">
+						<!-- 판매상태 검색 -->
+						<div class="search-row">
+							<label>판매 상태</label>
+							<div class="dropdown">
+								<button class="btn btn-outline-secondary dropdown-toggle"
+									type="button" data-bs-toggle="dropdown">상태 선택</button>
+								<div class="dropdown-menu status-search">
+									<label class="dropdown-item"><input type="checkbox"
+										name="status" value="SELLING" data-name="판매중"> 판매중</label> <label
+										class="dropdown-item"><input type="checkbox"
+										name="status" value="SOLD_OUT" data-name="품절"> 품절</label> <label
+										class="dropdown-item"><input type="checkbox"
+										name="status" value="STOPPED" data-name="판매중지"> 판매중지</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- 선택된 카테고리/상태  -->
+						<div id="selectedFilters" class="selected-items"></div>
+
 					</div>
-
-
-					<!-- 카테고리 -->
-					<div class="col-md-3">
-						<label class="form-label">카테고리</label> <select name="categoryId"
-							class="form-select">
-
-							<option value="">전체 카테고리</option>
-
-							<option value="1"
-								${pageRequestDTO.categoryId == 1 ? 'selected' : ''}>소파</option>
-
-							<option value="2"
-								${pageRequestDTO.categoryId == 2 ? 'selected' : ''}>의자</option>
-
-							<option value="3"
-								${pageRequestDTO.categoryId == 3 ? 'selected' : ''}>테이블
-							</option>
-
-							<option value="4"
-								${pageRequestDTO.categoryId == 4 ? 'selected' : ''}>수납장
-							</option>
-
-							<option value="5"
-								${pageRequestDTO.categoryId == 5 ? 'selected' : ''}>조명</option>
-
-						</select>
+					<div class="row mt-3">
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-dark w-100">검색</button>
+						</div>
 					</div>
-
-
-					<!-- 상태 -->
-					<div class="col-md-3">
-						<label class="form-label">판매 상태</label> <select name="status"
-							class="form-select">
-
-							<option value="">전체 상태</option>
-
-							<option value="SELLING"
-								${pageRequestDTO.status == 'SELLING' ? 'selected' : ''}>
-								판매중</option>
-
-							<option value="SOLD_OUT"
-								${pageRequestDTO.status == 'SOLD_OUT' ? 'selected' : ''}>
-								품절</option>
-
-							<option value="STOPPED"
-								${pageRequestDTO.status == 'STOPPED' ? 'selected' : ''}>
-								판매중지</option>
-
-						</select>
-					</div>
-
-
-					<!-- 검색 버튼 -->
-					<div class="col-md-2 d-flex align-items-end">
-						<button type="submit" class="btn btn-dark w-100">검색</button>
-					</div>
-
-				</div>
-
 			</form>
 
 		</div>
@@ -222,27 +210,24 @@
 				<ul class="pagination justify-content-center">
 					<!-- Prve -->
 					<c:if test="${responseDTO.prev}">
-						<li class="page-item">
-							<a class="page-link" href="/product/list?page=${responseDTO.start - 1}&size=${requestDTO.size}">
-								이전 
-							</a>
-						</li>
+						<li class="page-item"><a class="page-link"
+							href="/product/list?page=${responseDTO.start - 1}&size=${requestDTO.size}${searchDTO.link}">
+								이전 </a></li>
 					</c:if>
 					<!-- 페이지 번호 -->
-					<c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+					<c:forEach begin="${responseDTO.start}" end="${responseDTO.end}"
+						var="num">
 						<li class="page-item ${requestDTO.page == num ? 'active' : ''}">
-							<a class="page-link" href="/product/list?page=${num}&size=${requestDTO.size}">
-								${num} 
-							</a>
+							<a class="page-link"
+							href="/product/list?page=${num}&size=${requestDTO.size}${searchDTO.link}">
+								${num} </a>
 						</li>
 					</c:forEach>
 					<!-- Next -->
 					<c:if test="${responseDTO.next}">
-						<li class="page-item">
-							<a class="page-link" href="/product/list?page=${responseDTO.end + 1}&size=${requestDTO.size}">
-								다음 
-							</a>
-						</li>
+						<li class="page-item"><a class="page-link"
+							href="/product/list?page=${responseDTO.end + 1}&size=${requestDTO.size}${searchDTO.link}">
+								다음 </a></li>
 					</c:if>
 				</ul>
 			</nav>
@@ -250,20 +235,39 @@
 		</div>
 
 	</div>
-<!-- 
 
 	<script>
-		function changeSize(size) {
-
-			const urlParams = new URLSearchParams(location.search);
-
-			urlParams.set('page', '1');
-			urlParams.set('size', size);
-
-			location.href = '${pageContext.request.contextPath}/product/list?'
-					+ urlParams.toString();
+	
+		/* Filter Chip 함수 */
+		function selectedFilters(containerClass){
+			
+			const selected = document.querySelector("#selectedFilters");
+			
+			selected.innerHTML = "";
+			
+			document.querySelectorAll(`${containerClass} input:checked`).forEach(checkbox => {
+		        const span = document.createElement("span");
+		        span.innerHTML = checkbox.dataset.name + " × ";
+		        selected.appendChild(span);
+		    });
+			
 		}
-	</script> -->
+		
+		/* 카테고리 선택 */
+		document.querySelector(".categoryList").addEventListener("click", e => {
+			 if (!e.target.closest(".dropdown-item")) return;
+			 selectedFilters(".categoryList");
+		},false)
+		
+		/* 상품선택 */
+		document.querySelector(".status-search").addEventListener("click", e => {
+			 if (!e.target.closest(".dropdown-item")) return;
+			 selectedFilters(".status-search");
+		},false)
+				
+		
+	
+	</script>
 
 </main>
 

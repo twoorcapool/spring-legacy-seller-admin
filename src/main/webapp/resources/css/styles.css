@@ -76,8 +76,86 @@ body {
 	font-weight: 600;
 }
 
+
+
 .section-card {
 	border: none;
 	border-radius: 10px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Search */
+.search-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.search-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-row > label {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-item input {
+    margin-right: 8px;
+}
+
+/* selectedFilters */
+#selectedFilters {
+    flex-basis: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    font-size: 13px;
+}
+
+/* Checkbox */
+.checkbox-group {
+    display: flex;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.checkbox-group input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-group label:has(input:checked) {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+/* selectedFilters */
+#selectedFilters {
+    flex-basis: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    font-size: 13px;
+}
+
+.selected-items {
+    width: 100%;
+    display: block;
+    margin-top: 5px;
 }

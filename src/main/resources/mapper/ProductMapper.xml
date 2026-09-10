@@ -3,19 +3,49 @@
 
 
 <mapper namespace="org.adminsystem.product.mapper.ProductMapper">
-	
+
+	<sql id="search">
+		<where>
+			<if test="search.keyword != null and search.keyword != ''">
+				pname LIKE CONCAT('%',#{search.keyword},'%')
+			</if>
+			<if test="search.categoryId != null and search.categoryId.size() != 0">
+				AND category_id IN
+				<foreach item="category" collection="search.categoryId"
+					open="(" separator="," close=")">
+					#{category}
+				</foreach>
+			</if>
+			<if test="search.status != null and search.status.size() != 0">
+				AND status IN
+				<foreach item="status" collection="search.status" open="("
+					separator="," close=")">
+					#{status}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
 	<select id="selectPage" resultType="ProductDTO">
-		select * from tbl_product 
+		select * from tbl_product
+		<include refid="search" />
 		order by pno desc
 		limit #{limit} offset #{offset}
 	</select>
-	
-	<select id="selectOne" resultType="ProductDTO">
-		select * from tbl_product where pno = #{pno}
+
+	<select id="selectCategories" resultType="CategoryDTO">
+		select * from category
+		order by category_id asc
 	</select>
-	
+
+	<select id="selectOne" resultType="ProductDTO">
+		select * from tbl_product
+		where pno = #{pno}
+	</select>
+
 	<select id="selectCount" resultType="int">
 		select count(*) from tbl_product
+		<include refid="search" />
 	</select>
 
 </mapper>

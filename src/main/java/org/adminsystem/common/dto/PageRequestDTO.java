@@ -1,15 +1,16 @@
 package org.adminsystem.common.dto;
 
+import org.adminsystem.product.dto.ProductSearchDTO;
+
 import lombok.Getter;
-import lombok.ToString;
 
 @Getter
 public class PageRequestDTO {
 	
 	private int page;
 	private int size;
-	private String type; //검색조건
-	private String keyword; //검색키워드
+	private ProductSearchDTO search;
+	
 	
 	//기본값 지정
 	public PageRequestDTO(){
@@ -53,6 +54,12 @@ public class PageRequestDTO {
 	        }
 	        this.size = size;
 	    }
+	
+	public void setSearch(ProductSearchDTO searchDTO) {
+	    this.search = searchDTO;
+	}
+	
+
 	
 	
 }

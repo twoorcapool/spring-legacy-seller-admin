@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.adminsystem.common.dto.PageRequestDTO;
 import org.adminsystem.common.dto.PageResponseDTO;
+import org.adminsystem.product.dto.CategoryDTO;
 import org.adminsystem.product.dto.ProductDTO;
 import org.adminsystem.product.mapper.ProductMapper;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class ProductServiceImpl implements ProductService{
 	public PageResponseDTO<ProductDTO> list(PageRequestDTO pageRequestDTO) {
 		
 		List<ProductDTO> dtoList = productMapper.selectPage(pageRequestDTO);
-		int total = productMapper.selectCount();
+		int total = productMapper.selectCount(pageRequestDTO);
 		
 		return PageResponseDTO.<ProductDTO>withAll()
 				.dtoList(dtoList)
@@ -33,6 +34,9 @@ public class ProductServiceImpl implements ProductService{
 				.build();
 	}
 	
+	@Override
+	public List<CategoryDTO> getCategories() {
+	    return productMapper.selectCategories();
+	}
 	
-
 }
