@@ -5,17 +5,15 @@
 <%@include file="../includes/header.jsp"%>
 
 <main class="main-content">
+
 	<!-- 페이지 제목 -->
 	<div class="d-flex justify-content-between align-items-center mb-4">
-
 		<div>
 			<h2 class="fw-bold mb-1">상품 관리</h2>
 			<p class="text-muted mb-0">등록된 상품을 조회하고 관리합니다.</p>
 		</div>
-
-		<a href="${pageContext.request.contextPath}/product/register"
+		<a href="${pageContext.request.contextPath}/product/add"
 			class="btn btn-dark"> + 상품 등록 </a>
-
 	</div>
 
 
@@ -29,7 +27,7 @@
 
 				<div class="row g-2">
 					<div class="search-box">
-						
+
 						<!-- 키워드검색 -->
 						<div class="search-row">
 							<c:set var="keyword">
@@ -39,7 +37,7 @@
 								value="<c:out value='${keyword}'/>"
 								placeholder="상품명 또는 설명을 입력하세요">
 						</div>
-						
+
 						<!-- 카테고리 검색 -->
 						<div class="search-row">
 							<label>카테고리</label>

@@ -7,8 +7,7 @@
 <%@include file="../includes/header.jsp"%>
 
 <main class="main-content">
-${requestDTO.pageLink}
-${requestDTO.search.link}
+
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>

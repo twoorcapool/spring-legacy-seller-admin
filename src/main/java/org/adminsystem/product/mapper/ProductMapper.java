@@ -15,5 +15,7 @@ public interface ProductMapper {
 	int selectCount(PageRequestDTO page);
 	
 	List<CategoryDTO> selectCategories();
+	
+	int insertProduct(ProductDTO productDTO); //등록된 행 개수를 반환.
 
 }

@@ -43,6 +43,12 @@ public class ProductServiceImpl implements ProductService{
 	public ProductDTO getProductOne(int pno) {
 		return productMapper.selectOne(pno);
 	}
+
+	@Override
+	public Long add(ProductDTO productDTO) {
+		productMapper.insertProduct(productDTO);
+		return productDTO.getPno();
+	}
 	
 	
 }

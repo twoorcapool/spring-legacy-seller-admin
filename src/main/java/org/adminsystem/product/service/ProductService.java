@@ -15,4 +15,6 @@ public interface ProductService {
 	
 	ProductDTO getProductOne(int pno);
 	
+	Long add(ProductDTO productDTO); //등록된 상품 번호 반환. 
+	
 }

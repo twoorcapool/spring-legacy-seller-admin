@@ -7,17 +7,17 @@
 	<sql id="search">
 		<where>
 			<if test="search.keyword != null and search.keyword != ''">
-				pname LIKE CONCAT('%',#{search.keyword},'%')
+				p.pname LIKE CONCAT('%',#{search.keyword},'%')
 			</if>
 			<if test="search.categoryId != null and search.categoryId.size() != 0">
-				AND category_id IN
+				AND p.category_id IN
 				<foreach item="category" collection="search.categoryId"
 					open="(" separator="," close=")">
 					#{category}
 				</foreach>
 			</if>
 			<if test="search.status != null and search.status.size() != 0">
-				AND status IN
+				AND p.status IN
 				<foreach item="status" collection="search.status" open="("
 					separator="," close=")">
 					#{status}
@@ -32,9 +32,9 @@
 		    c.name AS category_name,
 		    s.uname AS seller_name
 		from tbl_product p
-		<include refid="search" />
 		left outer join category c on p.category_id = c.category_id
 		left outer join tbl_user s on p.seller_id = s.uid
+		<include refid="search" />
 		order by pno desc
 		limit #{limit} offset #{offset}
 	</select>
@@ -56,8 +56,13 @@
 	</select>
 
 	<select id="selectCount" resultType="int">
-		select count(*) from tbl_product
+		select count(*) from tbl_product p
 		<include refid="search" />
 	</select>
+	
+	<insert id="insertProduct"  useGeneratedKeys="true" keyProperty="pno">
+		insert into tbl_product (pname, pdesc, price, category_id, stock, status, seller_id)
+		values (#{pname},#{pdesc},#{price},#{categoryId},#{stock},#{status}, 5)
+	</insert>
 
 </mapper>
