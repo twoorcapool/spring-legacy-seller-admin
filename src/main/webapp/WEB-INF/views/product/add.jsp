@@ -15,7 +15,7 @@
 		<div class="card shadow-sm border-0">
 			<div class="card-body p-4">
 				<form action="${pageContext.request.contextPath}/product/add"
-					method="post">
+					method="post" enctype="multipart/form-data">
 
 					<div class="mb-4">
 						<label for="pname" class="form-label fw-bold">상품명</label> <input
@@ -65,6 +65,11 @@
 							</select>
 						</div>
 					</div>
+					
+					<div class="mb-4">
+    <label for="files" class="form-label fw-bold">상품 이미지</label>
+    <input type="file" id="files" name="files" class="form-control" multiple>
+</div>
 
 					<div class="d-flex justify-content-between mt-5">
 						<a href="${pageContext.request.contextPath}/product/list"

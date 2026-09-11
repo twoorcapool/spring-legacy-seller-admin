@@ -2,6 +2,8 @@ package org.adminsystem.product.dto;
 
 import java.time.LocalDateTime;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -20,5 +22,8 @@ public class ProductDTO {
     
     private String categoryName;
     private String sellerName;
+    
+    //업로드 파일
+    private MultipartFile[] files;
     
 }

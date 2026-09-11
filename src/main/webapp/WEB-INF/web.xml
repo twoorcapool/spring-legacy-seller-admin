@@ -4,7 +4,7 @@
 	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 	id="WebApp_ID" version="6.0">
 	<display-name>sp2</display-name>
-	
+
 	<!-- 리스너 설정 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -24,6 +24,14 @@
 			<param-value>/WEB-INF/spring/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<multipart-config>
+			<location>/opt/homebrew/var/www/adminSystem/uploads/</location>
+			<max-file-size>20971520</max-file-size><!-- 최대크기 1MB * 20 -->
+			<max-request-size>41943040</max-request-size><!-- 모든요청 최대크기 1MB * 40 -->
+			<file-size-threshold>20971520</file-size-threshold>
+		</multipart-config>
+		
 	</servlet>
 
 	<servlet-mapping>

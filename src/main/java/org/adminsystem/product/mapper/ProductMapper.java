@@ -5,6 +5,7 @@ import java.util.List;
 import org.adminsystem.common.dto.PageRequestDTO;
 import org.adminsystem.product.dto.CategoryDTO;
 import org.adminsystem.product.dto.ProductDTO;
+import org.adminsystem.product.dto.ProductImageDTO;
 
 public interface ProductMapper {
 	
@@ -17,5 +18,7 @@ public interface ProductMapper {
 	List<CategoryDTO> selectCategories();
 	
 	int insertProduct(ProductDTO productDTO); //등록된 행 개수를 반환.
+	
+	int insertProductImage(ProductImageDTO imageDTO);
 
 }
