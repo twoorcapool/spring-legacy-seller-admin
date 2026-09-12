@@ -6,7 +6,11 @@
 
 	<resultMap id="productResultMap" type="ProductDTO">
 		<id property="pno" column="pno" />
-
+		<result property="pname" column="pname" />
+		<result property="pdesc" column="pdesc" />
+		<result property="price" column="price" />
+		<result property="stock" column="stock" />
+		<result property="status" column="status" />
 		<result property="categoryName" column="category_name" />
 		<result property="sellerName" column="seller_name" />
 
@@ -45,16 +49,18 @@
 
 	<select id="selectPage" resultType="ProductDTO">
 		select
-			p.*,
-			c.name AS category_name,
-			s.uname AS seller_name,
-			pi.filename AS thumbnail_filename
+		p.*,
+		c.name AS category_name,
+		s.uname AS seller_name,
+		pi.filename AS thumbnail_filename
 		from tbl_product p
-		left outer join category c on p.category_id = c.category_id
-		left outer join tbl_user s on p.seller_id= s.uid
-		left outer join tbl_product_img pi 
-			on p.pno = pi.pno
-			and pi.ord = 0
+		left outer join category c on
+		p.category_id = c.category_id
+		left outer join tbl_user s on
+		p.seller_id= s.uid
+		left outer join tbl_product_img pi
+		on p.pno = pi.pno
+		and pi.ord = 0
 		<include refid="search" />
 		order by pno desc
 		limit #{limit} offset #{offset}
@@ -68,7 +74,8 @@
 	<select id="selectOne" resultMap="productResultMap">
 		SELECT
 		p.*,
-		c.name AS category_name,
+		c.name AS
+		category_name,
 		s.uname AS seller_name,
 		pi.image_id,
 		pi.pno AS image_pno,
@@ -77,9 +84,12 @@
 		pi.ord,
 		pi.file_url
 		FROM tbl_product p
-		LEFT OUTER JOIN category c ON p.category_id = c.category_id
-		LEFT OUTER JOIN tbl_user s ON p.seller_id = s.uid
-		LEFT OUTER JOIN tbl_product_img pi ON p.pno = pi.pno
+		LEFT
+		OUTER JOIN category c ON p.category_id = c.category_id
+		LEFT OUTER JOIN
+		tbl_user s ON p.seller_id = s.uid
+		LEFT OUTER JOIN tbl_product_img pi ON
+		p.pno = pi.pno
 		WHERE p.pno = #{pno}
 		ORDER BY pi.ord ASC
 	</select>

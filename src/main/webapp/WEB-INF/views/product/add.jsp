@@ -23,11 +23,7 @@
 							placeholder="상품명을 입력하세요" required>
 					</div>
 
-					<div class="mb-4">
-						<label for="pdesc" class="form-label fw-bold">상품 설명</label>
-						<textarea id="pdesc" name="pdesc" class="form-control" rows="6"
-							placeholder="상품 설명을 입력하세요"></textarea>
-					</div>
+					
 
 					<div class="row g-4">
 						<div class="col-md-6">
@@ -70,6 +66,28 @@
 						<label for="files" class="form-label fw-bold">상품 이미지</label> <input
 							type="file" id="files" name="files" class="form-control" multiple>
 					</div>
+					
+				
+					
+					
+					<!-- CKEditor -->
+
+					<div class="ckeditor-container">
+						<div class="editor-container editor-container_classic-editor">
+							<div class="editor-container__editor">
+								<textarea id="editor" name="pdesc"></textarea>
+							</div>
+						</div>
+					</div>
+
+					<script src="https://cdn.ckeditor.com/ckeditor5/48.5.0/ckeditor5.umd.js" crossorigin></script>
+					<script src="https://cdn.ckeditor.com/ckeditor5/48.5.0/translations/ko.umd.js" crossorigin></script>
+					<script src="${pageContext.request.contextPath}/resources/js/product/ckeditor.js"></script>
+					
+					<!-- =================================== -->
+					
+					
+					
 
 					<div class="d-flex justify-content-between mt-5">
 						<a href="${pageContext.request.contextPath}/product/list"

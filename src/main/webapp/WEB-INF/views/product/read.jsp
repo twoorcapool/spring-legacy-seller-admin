@@ -46,7 +46,7 @@
 						<div class="mb-4">
 							<h6 class="fw-bold text-secondary mb-2">상품 설명</h6>
 							<div class="p-3 bg-light rounded">
-								<c:out value="${product.pdesc}" />
+								${product.pdesc}
 							</div>
 						</div>
 
