@@ -4,12 +4,29 @@
 
 <mapper namespace="org.adminsystem.product.mapper.ProductMapper">
 
+	<resultMap id="productResultMap" type="ProductDTO">
+		<id property="pno" column="pno" />
+
+		<result property="categoryName" column="category_name" />
+		<result property="sellerName" column="seller_name" />
+
+		<collection property="images" ofType="ProductImageDTO">
+			<id property="imageId" column="image_id" />
+			<result property="pno" column="image_pno" />
+			<result property="filename" column="filename" />
+			<result property="imageType" column="image_type" />
+			<result property="ord" column="ord" />
+			<result property="fileUrl" column="file_url" />
+		</collection>
+	</resultMap>
+
 	<sql id="search">
 		<where>
 			<if test="search.keyword != null and search.keyword != ''">
 				p.pname LIKE CONCAT('%',#{search.keyword},'%')
 			</if>
-			<if test="search.categoryId != null and search.categoryId.size() != 0">
+			<if
+				test="search.categoryId != null and search.categoryId.size() != 0">
 				AND p.category_id IN
 				<foreach item="category" collection="search.categoryId"
 					open="(" separator="," close=")">
@@ -29,11 +46,15 @@
 	<select id="selectPage" resultType="ProductDTO">
 		select
 			p.*,
-		    c.name AS category_name,
-		    s.uname AS seller_name
+			c.name AS category_name,
+			s.uname AS seller_name,
+			pi.filename AS thumbnail_filename
 		from tbl_product p
 		left outer join category c on p.category_id = c.category_id
-		left outer join tbl_user s on p.seller_id = s.uid
+		left outer join tbl_user s on p.seller_id= s.uid
+		left outer join tbl_product_img pi 
+			on p.pno = pi.pno
+			and pi.ord = 0
 		<include refid="search" />
 		order by pno desc
 		limit #{limit} offset #{offset}
@@ -44,31 +65,45 @@
 		order by category_id asc
 	</select>
 
-	<select id="selectOne" resultType="ProductDTO">
-		select
-			p.*,
-		    c.name AS category_name,
-		    s.uname AS seller_name
-		from tbl_product p
-		left outer join category c on p.category_id = c.category_id
-		left outer join tbl_user s on p.seller_id = s.uid
-		where pno = #{pno}
+	<select id="selectOne" resultMap="productResultMap">
+		SELECT
+		p.*,
+		c.name AS category_name,
+		s.uname AS seller_name,
+		pi.image_id,
+		pi.pno AS image_pno,
+		pi.filename,
+		pi.image_type,
+		pi.ord,
+		pi.file_url
+		FROM tbl_product p
+		LEFT OUTER JOIN category c ON p.category_id = c.category_id
+		LEFT OUTER JOIN tbl_user s ON p.seller_id = s.uid
+		LEFT OUTER JOIN tbl_product_img pi ON p.pno = pi.pno
+		WHERE p.pno = #{pno}
+		ORDER BY pi.ord ASC
 	</select>
 
 	<select id="selectCount" resultType="int">
 		select count(*) from tbl_product p
 		<include refid="search" />
 	</select>
-	
-	<insert id="insertProduct"  useGeneratedKeys="true" keyProperty="pno">
-		insert into tbl_product (pname, pdesc, price, category_id, stock, status, seller_id)
-		values (#{pname},#{pdesc},#{price},#{categoryId},#{stock},#{status}, 5)
+
+	<insert id="insertProduct" useGeneratedKeys="true"
+		keyProperty="pno">
+		insert into tbl_product (pname, pdesc, price, category_id,
+		stock, status, seller_id)
+		values
+		(#{pname},#{pdesc},#{price},#{categoryId},#{stock},#{status}, 5)
 	</insert>
-	
-	<insert id="insertProductImage"  useGeneratedKeys="true" keyProperty="imageId">
-		insert into tbl_product_img (pno, filename, image_type, ord, file_url)
-		values (#{pno}, #{filename},#{imageType},#{ord},#{fileUrl})
+
+	<insert id="insertProductImage" useGeneratedKeys="true"
+		keyProperty="imageId">
+		insert into tbl_product_img (pno, filename, image_type,
+		ord, file_url)
+		values (#{pno},
+		#{filename},#{imageType},#{ord},#{fileUrl})
 	</insert>
-	
+
 
 </mapper>

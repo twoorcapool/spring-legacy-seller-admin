@@ -125,6 +125,7 @@
 					<thead class="table-light">
 						<tr>
 							<th>번호</th>
+							<th>  </th>
 							<th>상품명</th>
 							<th>카테고리</th>
 							<th>판매자</th>
@@ -143,6 +144,17 @@
 							<tr>
 
 								<td>${product.pno}</td>
+								
+								<td>
+									<div>
+										<img
+											src="http://localhost/adminSystem/uploads/s_${product.thumbnailFilename}"
+											alt="${product.pname}"
+											object-fit: cover;">
+									</div>
+								</td>
+								
+								
 
 								<td><a
 									href="${pageContext.request.contextPath}/product/read/${product.pno}?${requestDTO.pageLink}"

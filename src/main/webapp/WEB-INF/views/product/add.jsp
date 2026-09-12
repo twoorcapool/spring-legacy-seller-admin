@@ -65,11 +65,11 @@
 							</select>
 						</div>
 					</div>
-					
+
 					<div class="mb-4">
-    <label for="files" class="form-label fw-bold">상품 이미지</label>
-    <input type="file" id="files" name="files" class="form-control" multiple>
-</div>
+						<label for="files" class="form-label fw-bold">상품 이미지</label> <input
+							type="file" id="files" name="files" class="form-control" multiple>
+					</div>
 
 					<div class="d-flex justify-content-between mt-5">
 						<a href="${pageContext.request.contextPath}/product/list"

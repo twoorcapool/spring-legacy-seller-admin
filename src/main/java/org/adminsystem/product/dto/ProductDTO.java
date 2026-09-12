@@ -1,6 +1,7 @@
 package org.adminsystem.product.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +24,11 @@ public class ProductDTO {
     private String categoryName;
     private String sellerName;
     
-    //업로드 파일
-    private MultipartFile[] files;
+    private MultipartFile[] files; //업로드이미지 파일
+    
+    private List<ProductImageDTO> images;
+    
+    private String thumbnailFilename; //썸네일
+    
     
 }
